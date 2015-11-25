@@ -16,8 +16,11 @@ if (isset($_POST['submit'])) {
 // Заголовок страницы
 $title="Добавить статью";
 
-// Заготовка страницы
-$content='theme/new.php';
+// Внутренний шаблон.
+$content = template('theme/template/v_new.php');
 
-// вывод в HTML
-include('Pattern/pattern-main.php');
+// Внешний шаблон.
+$page = template('theme/v_main.php', array('title' => $title, 'content' => $content));
+
+// Вывод HTML
+echo $page;
