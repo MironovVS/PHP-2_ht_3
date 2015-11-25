@@ -46,11 +46,11 @@ function articles_get($id_article)
 		$request=mysqli_query(getDbConnect(),$sql);
 
 		//Формируем массив из полученных данных
-		$search=array();
+		$array=array();
 		While ($row=mysqli_fetch_assoc($request)) {
-			$search[]=$row;
+			$array[]=$row;
 		}
-		return array($search);
+		return array($array);
 }
 
 // добавить статью
@@ -71,8 +71,6 @@ function articles_new($name, $date, $content)
 
 	// Запрос
 	$sql = "INSERT INTO `lesson2` (`date`, `name`,`content`) VALUES ('$date','%s', '%s')";
-
-	logs($name, "new");
 
 	//выполняем запрос
 	$query = sprintf($sql, sql_escape($name), sql_escape($content));
@@ -96,8 +94,6 @@ function articles_edit($id_article, $name, $content)
 	//Запрос в бд
 	$request="UPDATE `lesson2` SET `name`='$name', `content`='$content' WHERE `id`='$id_article'";
 
-	logs($id_article, "edit");
-
 	//Выполняем запрос
 	mysqli_query(getDbConnect(),$request);
 }
@@ -111,8 +107,6 @@ function articles_delete($id_article)
 	//Запрос
 	$sql="DELETE FROM `lesson2` WHERE `id` = $id_article";
 
-	logs($id_article, "del");
-
 	//Выполняем запрос
 	mysqli_query(getDbConnect(),$sql);
 
@@ -125,32 +119,14 @@ function articles_intro($article)
 	// $article - это ассоциативный массив, представляющий статью
 }
 
-//Делаем логи
-function logs($log, $value) {
-	switch($value) {
-		case "article":
-			$f = fopen('log/log-article.txt', 'a+');
-			$time = date('H:i:s');
-			fputs($f, "Пользователь просмотрел статью c id: ".$log." в $time \n");
-			fclose($f);
-			break;
-		case "new":
-			$f = fopen('log/log-new.txt', 'a+');
-			$time = date('H:i:s');
-			fputs($f, "Пользователь создал статью с именем ".$log." в $time \n");
-			fclose($f);
-			break;
-		case "edit":
-			$f = fopen('log/log-edit.txt', 'a+');
-			$time = date('H:i:s');
-			fputs($f, "Пользователь редактировал статью с id ".$log." в $time \n");
-			fclose($f);
-			break;
-		case "del":
-			$f = fopen('log/log-del.txt', 'a+');
-			$time = date('H:i:s');
-			fputs($f, "Пользователь удалил статью с id ".$log." в $time \n");
-			fclose($f);
-			break;
-	}
+// Подключение шаблона.
+function template($fileName, $vars = array())
+{
+	// Устанавливаем переменные из массива в шаблон
+	extract($vars);
+
+	// Генерация HTML в строку.
+	ob_start();
+	include $fileName;
+	return ob_get_clean();
 }
