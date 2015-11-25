@@ -13,7 +13,7 @@
   <hr>
 </header>
 <section>
-  <?php include $content ?>
+  <?php echo $content ?>
 </section>
 </body>
 <footer>
