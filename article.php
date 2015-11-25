@@ -9,11 +9,16 @@ die("Не верный id");
 
 $article = articles_get($id);
 
+var_dump($article);
+
 // Заголовок страницы
 $title="Простотр статьи";
 
-// Заготовка страницы
-$content='theme/article.php';
+// Внутренний шаблон.
+$content = template('theme/template/v_article.php', array('article'=>$article));
+
+// Внешний шаблон.
+$page = template('theme/v_main.php', array('title' => $title, 'content' => $content));
 
 // Вывод HTML
-include ('Pattern/pattern-main.php');
+echo $page;
