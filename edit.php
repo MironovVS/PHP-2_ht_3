@@ -11,7 +11,7 @@ $article_edit = articles_get($id);
 
 if (isset($_POST['submit'])) {
   articles_edit($_POST['id'], $_POST['name'], $_POST['content']);
-  die(header('Location: index.php'));
+  die(header('Location: v_index.php'));
 }
 
 // Заголовок страницы
@@ -21,4 +21,4 @@ $title="Редактирование статьиа";
 $content='theme/edit.php';
 
 // Вывод HTML
-include ('Pattern/pattern-main.php');
+include('Pattern/v_main.php');
