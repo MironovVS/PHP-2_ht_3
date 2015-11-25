@@ -16,8 +16,11 @@ $articles_all = articles_all();
 // Заголовок страницы
 $title = 'Список статей';
 
-// Заготовка страницы
-$content='theme/index.php';
+// Внутренний шаблон.
+$content = template('theme/template/v_index.php', array('articles_all'=>$articles_all));
+
+// Внешний шаблон.
+$page = template('theme/v_main.php', array('title' => $title, 'content' => $content));
 
 // Вывод HTML
-include ('Pattern/pattern-main.php');
+echo $page;
