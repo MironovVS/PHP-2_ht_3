@@ -11,14 +11,17 @@ $article_edit = articles_get($id);
 
 if (isset($_POST['submit'])) {
   articles_edit($_POST['id'], $_POST['name'], $_POST['content']);
-  die(header('Location: v_index.php'));
+  die(header('Location: index.php'));
 }
 
 // Заголовок страницы
-$title="Редактирование статьиа";
+$title="Редактирование статьи";
 
-// Заготовка страницы
-$content='theme/edit.php';
+// Внутренний шаблон.
+$content = template('theme/template/v_edit.php', array('article_edit'=>$article_edit));
+
+// Внешний шаблон.
+$page = template('theme/v_main.php', array('title' => $title, 'content' => $content));
 
 // Вывод HTML
-include('Pattern/v_main.php');
+echo $page;
