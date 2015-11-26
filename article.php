@@ -9,8 +9,6 @@ die("Не верный id");
 
 $article = articles_get($id);
 
-var_dump($article);
-
 // Заголовок страницы
 $title="Простотр статьи";
 

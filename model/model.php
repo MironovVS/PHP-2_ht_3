@@ -37,20 +37,18 @@ function articles_get($id_article)
 		// Подготовка
 		$id_article=(int)$id_article;
 
-		logs($id_article, "article");
-
 		//Запрос
-		$sql="SELECT * FROM `Lesson2` WHERE `id`=$id_article";
+		$sql="SELECT * FROM `Lesson2` WHERE `id`='$id_article'";
 
 		//Выполняем запрос в БД
 		$request=mysqli_query(getDbConnect(),$sql);
 
 		//Формируем массив из полученных данных
-		$array=array();
+		$article=array();
 		While ($row=mysqli_fetch_assoc($request)) {
-			$array[]=$row;
+			$article[]=$row;
 		}
-		return array($array);
+		return array($article);
 }
 
 // добавить статью
