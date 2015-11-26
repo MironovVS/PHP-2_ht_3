@@ -7,12 +7,12 @@ $error - ошибка юзера
 */?>
 
 	<h2>Новая статья</h2>
-	<?php if ($error): ?>
+	<?php if ($error = true): ?>
 		<b style="color:red">Заполните все поля!</b>
 	<?php endif; ?>
 	<form method="post">
 		Название<sup style="color:red">*</sup>: <br>
-		<input type="text" name="title_art" value="<?php echo $title_art ?>">
+		<input type="text" name="title_art" value="<?php echo $title_art?>">
 		<br><br>
 		Содержание: <br>
 		<textarea name="content_art"><?php echo $content_art?></textarea>

@@ -10,7 +10,7 @@ content - текст
 */
 
 ?>
-<b><a href="v_new.php">Новая статья</a></b>
+<b><a href="new.php">Новая статья</a></b>
 <table>
 		<?php foreach ($articles_all as $article): ?>
 		<?php for($i=0; $i<count($article); $i++): ?>
